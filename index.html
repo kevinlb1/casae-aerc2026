@@ -1,0 +1,4578 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google" content="notranslate">
+  <title>Conference Program</title>
+  <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    const initialNavigation = performance.getEntriesByType('navigation')[0];
+    const isReloadNavigation = initialNavigation && initialNavigation.type === 'reload';
+    if (isReloadNavigation && window.location.hash) {
+      history.replaceState(null, document.title, window.location.pathname + window.location.search);
+    }
+  </script>
+  <style>
+
+:root {
+  color-scheme: light;
+  --page-bg: #ffffff;
+  --surface: #f6f7f5;
+  --surface-strong: #eef1ee;
+  --ink: #202427;
+  --muted: #626b73;
+  --line: #d9dedc;
+  --accent: #255f63;
+  --accent-2: #8f3f3b;
+  --shadow: 0 14px 32px rgba(31, 39, 42, 0.1);
+  --symposium: #245c8f;
+  --symposium-bg: #e7f0f8;
+  --paper-type: #366c48;
+  --paper-type-bg: #e8f2eb;
+  --roundtable: #856019;
+  --roundtable-bg: #f4ead1;
+  --alternative: #7a3f67;
+  --alternative-bg: #f2e5ed;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--page-bg);
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.45;
+}
+
+.topbar,
+main {
+  width: min(1180px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px 0 18px;
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: var(--accent);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 0;
+  font-size: clamp(1.55rem, 4vw, 3.15rem);
+  line-height: 1;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.segmented,
+.day-nav {
+  display: inline-grid;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--page-bg);
+  overflow: hidden;
+}
+
+.segmented {
+  grid-template-columns: 1fr 1fr;
+}
+
+.day-nav {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.segmented button {
+  min-height: 42px;
+  padding: 0 14px;
+}
+
+.segmented button[aria-pressed="true"] {
+  background: var(--accent);
+  color: white;
+}
+
+.day-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 14px;
+  color: var(--ink);
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.day-nav a + a {
+  border-left: 1px solid var(--line);
+}
+
+.day-nav a:hover,
+.day-nav a[aria-current="page"],
+.day-nav a:focus-visible {
+  background: var(--accent);
+  color: white;
+  outline: 0;
+}
+
+.mobile-jumpbar {
+  display: none;
+}
+
+.day {
+  padding: 28px 0 48px;
+  scroll-margin-top: 8px;
+}
+
+.day + .day {
+  border-top: 1px solid var(--line);
+}
+
+.day-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+h2 {
+  margin-bottom: 0;
+  font-size: clamp(1.7rem, 4vw, 2.6rem);
+  line-height: 1;
+}
+
+.day-count {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.timeline {
+  display: grid;
+  gap: 18px;
+}
+
+.time-block {
+  display: grid;
+  grid-template-columns: 116px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+  scroll-margin-top: 84px;
+}
+
+.time-block > time {
+  position: sticky;
+  top: 58px;
+  display: block;
+  border-left: 4px solid var(--accent-2);
+  padding: 9px 0 9px 10px;
+  color: var(--ink);
+  font-weight: 850;
+  line-height: 1.1;
+}
+
+.session-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 12px;
+}
+
+.session-card {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.session-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  border-bottom: 1px solid var(--line);
+  padding: 9px 11px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.presentation-list {
+  display: grid;
+}
+
+.compact-type-list {
+  display: none;
+}
+
+.presentation {
+  padding: 12px;
+  border-left: 5px solid var(--surface);
+}
+
+.presentation + .presentation {
+  border-top: 1px solid var(--line);
+}
+
+.type-symposium {
+  border-left-color: var(--symposium);
+}
+
+.type-paper {
+  border-left-color: var(--paper-type);
+}
+
+.type-roundtable {
+  border-left-color: var(--roundtable);
+}
+
+.type-alternative {
+  border-left-color: var(--alternative);
+}
+
+.type-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  margin-bottom: 7px;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+.type-symposium .type-badge,
+.type-badge.type-symposium {
+  background: var(--symposium-bg);
+  color: var(--symposium);
+}
+
+.type-paper .type-badge,
+.type-badge.type-paper {
+  background: var(--paper-type-bg);
+  color: var(--paper-type);
+}
+
+.type-roundtable .type-badge,
+.type-badge.type-roundtable {
+  background: var(--roundtable-bg);
+  color: var(--roundtable);
+}
+
+.type-alternative .type-badge,
+.type-badge.type-alternative {
+  background: var(--alternative-bg);
+  color: var(--alternative);
+}
+
+h3 {
+  margin-bottom: 7px;
+  font-size: 0.99rem;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+.presenters {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.event-block {
+  align-items: stretch;
+}
+
+.event-title {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 13px 16px;
+  background: var(--surface-strong);
+  color: var(--ink);
+  font-weight: 850;
+}
+
+body[data-density="compact"] .timeline {
+  gap: 8px;
+}
+
+body[data-density="compact"] .time-block {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  align-items: start;
+  gap: 8px;
+  min-width: 0;
+}
+
+body[data-density="compact"] .time-block > time {
+  position: static;
+  top: auto;
+  width: 88px;
+  border-left: 0;
+  border-top: 0;
+  padding: 6px 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+body[data-density="compact"] .session-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--session-count), minmax(0, 1fr));
+  width: 100%;
+  gap: 6px;
+  min-width: 0;
+  overflow: visible;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+}
+
+body[data-density="compact"] .session-grid::-webkit-scrollbar {
+  display: none;
+}
+
+body[data-density="compact"] .session-card {
+  min-width: 0;
+  box-shadow: none;
+}
+
+body[data-density="compact"] .session-meta {
+  display: grid;
+  gap: 2px;
+  border-bottom: 0;
+  padding: 6px 7px 4px;
+  font-size: 0.7rem;
+  line-height: 1.1;
+  text-transform: none;
+}
+
+body[data-density="compact"] .session-meta span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body[data-density="compact"] .session-meta span:first-child {
+  color: var(--ink);
+  font-size: 0.76rem;
+  font-weight: 850;
+}
+
+body[data-density="compact"] .session-meta span:last-child {
+  color: var(--muted);
+  font-size: 0.64rem;
+  font-weight: 700;
+}
+
+body[data-density="compact"] .presentation-list {
+  display: none;
+}
+
+body[data-density="compact"] .compact-type-list {
+  display: flex;
+  gap: 4px;
+  overflow: hidden;
+  padding: 0 7px 7px;
+}
+
+body[data-density="compact"] .type-badge {
+  min-height: 18px;
+  margin-bottom: 0;
+  padding: 1px 6px;
+  font-size: 0.62rem;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+body[data-density="compact"] .event-title {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  border-color: #edf0ed;
+  padding: 6px 8px;
+  background: #fdfefd;
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 750;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body[data-density="compact"] .day-heading .eyebrow,
+body[data-density="compact"] .day-count {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .topbar {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .controls {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    justify-content: stretch;
+    width: 100%;
+  }
+
+  h1 {
+    font-size: clamp(1rem, 6vw, 2rem);
+  }
+
+  .segmented {
+    min-width: 0;
+  }
+
+  .controls .day-nav {
+    display: none;
+  }
+
+  .segmented button {
+    min-height: 34px;
+    padding: 0 4px;
+    font-size: 0.76rem;
+  }
+
+  .mobile-jumpbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 8px;
+    width: min(1180px, calc(100% - 24px));
+    margin: 0 auto 14px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 8px 24px rgba(31, 39, 42, 0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  .mobile-jumpbar label {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+  }
+
+  .mobile-jumpbar span {
+    color: var(--muted);
+    font-size: 0.66rem;
+    font-weight: 850;
+    text-transform: uppercase;
+  }
+
+  .mobile-jumpbar select {
+    width: 100%;
+    min-width: 0;
+    min-height: 34px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--surface);
+    color: var(--ink);
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 750;
+  }
+
+  .day-heading {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .day {
+    scroll-margin-top: 74px;
+  }
+
+  .time-block {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    scroll-margin-top: 74px;
+  }
+
+  .time-block > time {
+    position: static;
+    border-left: 0;
+    border-top: 4px solid var(--accent-2);
+    padding: 8px 0 0;
+  }
+
+  .session-grid {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-density="compact"] .time-block {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  body[data-density="compact"] .time-block > time {
+    width: auto;
+    border-top: 2px solid var(--accent-2);
+    padding: 5px 0 1px;
+    font-size: 0.76rem;
+  }
+
+  body[data-density="compact"] .session-grid {
+    grid-template-columns: repeat(auto-fit, minmax(88px, 1fr));
+    overflow: visible;
+    padding-bottom: 0;
+  }
+
+  body[data-density="compact"] .session-meta {
+    padding: 5px 6px 3px;
+  }
+
+  body[data-density="compact"] .compact-type-list {
+    padding: 0 6px 6px;
+  }
+}
+
+@media print {
+  @page {
+    size: landscape;
+    margin: 0.45in;
+  }
+
+  body {
+    background: white;
+    color: black;
+    font-size: 10pt;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .topbar {
+    width: 100%;
+    padding: 0 0 12px;
+  }
+
+  .controls,
+  .day-nav,
+  .mobile-jumpbar,
+  .eyebrow {
+    display: none;
+  }
+
+  main {
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 22pt;
+  }
+
+  h2 {
+    font-size: 18pt;
+  }
+
+  .day {
+    padding: 0;
+    break-before: page;
+    page-break-before: always;
+  }
+
+  .day:first-child {
+    break-before: auto;
+    page-break-before: auto;
+  }
+
+  .day + .day {
+    border-top: 0;
+  }
+
+  .day-heading {
+    break-after: avoid;
+    margin-bottom: 10px;
+    page-break-after: avoid;
+  }
+
+  .timeline {
+    break-before: avoid;
+    gap: 9px;
+    page-break-before: avoid;
+  }
+
+  .time-block {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .time-block > time {
+    position: static;
+    top: auto;
+    border-left: 0;
+    border-top: 2px solid var(--accent-2);
+    break-after: avoid;
+    padding: 3px 0 1px;
+    font-size: 8pt;
+    page-break-after: avoid;
+  }
+
+  .session-grid {
+    break-before: avoid;
+    grid-template-columns: repeat(var(--session-count), minmax(0, 1fr));
+    gap: 4px;
+    page-break-before: avoid;
+  }
+
+  .session-card,
+  .event-title {
+    box-shadow: none;
+    border-color: #bfc7c5;
+    break-inside: avoid;
+  }
+
+  .session-meta {
+    padding: 3px 4px;
+    font-size: 6.4pt;
+  }
+
+  .presentation {
+    padding: 5px 5px;
+    border-left-width: 4px;
+  }
+
+  .type-badge {
+    min-height: 0;
+    margin-bottom: 3px;
+    padding: 1px 5px;
+    font-size: 6.8pt;
+  }
+
+  h3 {
+    margin-bottom: 3px;
+    font-size: 7.8pt;
+    line-height: 1.2;
+  }
+
+  .presenters {
+    font-size: 7pt;
+    line-height: 1.25;
+  }
+
+  .event-title {
+    padding: 6px 8px;
+  }
+
+  body[data-density="compact"] .session-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--session-count), minmax(0, 1fr));
+    gap: 4px;
+    overflow: visible;
+    padding-bottom: 0;
+  }
+
+  body[data-density="compact"] .time-block {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  body[data-density="compact"] .time-block > time {
+    width: auto;
+    border-left: 0;
+    padding: 3px 4px 3px 6px;
+    font-size: 7pt;
+  }
+
+  body[data-density="compact"] .session-card {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  body[data-density="compact"] .session-meta {
+    padding: 3px 4px 1px;
+    font-size: 5.7pt;
+  }
+
+  body[data-density="compact"] .compact-type-list {
+    gap: 2px;
+    padding: 0 4px 4px;
+  }
+
+  body[data-density="compact"] .type-badge {
+    min-height: 0;
+    padding: 1px 3px;
+    font-size: 5.5pt;
+  }
+}
+
+  </style>
+</head>
+<body data-density="full" translate="no">
+  <header class="topbar">
+    <div>
+      <h1>CASAE-AERC 2026 Program</h1>
+    </div>
+    <div class="controls" aria-label="Program display controls">
+      <nav class="day-nav" aria-label="Dates">
+        <a href="#may-28" aria-current="page">May 28</a><a href="#may-29">May 29</a><a href="#may-30">May 30</a>
+      </nav>
+      <div class="segmented" role="group" aria-label="Schedule detail">
+        <button type="button" data-density-button="compact">Compact</button>
+        <button type="button" data-density-button="full" aria-pressed="true">Full</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-jumpbar" aria-label="Schedule navigation">
+    <label>
+      <span>Date</span>
+      <select id="mobile-date">
+        <option value="may-28">May 28</option><option value="may-29">May 29</option><option value="may-30">May 30</option>
+      </select>
+    </label>
+    <label>
+      <span>Time</span>
+      <select id="mobile-time"></select>
+    </label>
+  </div>
+
+  <main>
+    
+    <section class="day" id="may-28">
+      <div class="day-heading">
+        <div>
+          <h2>May 28</h2>
+        </div>
+      </div>
+      <div class="timeline">
+        
+        <article class="time-block" id="may-28-block-0">
+          <time>9:00 - 10:30</time>
+          <div class="session-grid" style="--session-count: 7">
+            
+            <section class="session-card">
+              <div class="session-meta">
+                <span>S-1</span>
+                <span>1501</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-symposium">Symposium</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-symposium">
+                  <span class="type-badge">Symposium</span>
+                  <h3>Navigating Boundaries, Building Bridges: Adult Education Pathways for Immigrant and Non-Traditional Learners</h3>
+                  <p class="presenters">Kashif Raza; Randolph Wimmer; Danielle Gardiner Milln; David Burns; Josephine Chan; Carolyn MacLaren</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>S-2</span>
+                <span>1505</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-symposium">Symposium</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-symposium">
+                  <span class="type-badge">Symposium</span>
+                  <h3>Supporting a National Literacy Strategy: Researcher Insights and Considerations from the Adult Literacy SIG</h3>
+                  <p class="presenters">Stacey Crooks; Paula Elias; Hannah Peters; Annie Luk; Miles Murphy; Jude Walker</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>WORK</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>An Exploration of Korean Millennials’ Career Transitions</h3>
+                  <p class="presenters">Yeonjoo Kim</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Adult Learning for Climate Action and the Future of Work in Australia: A Capability Approach Analysis</h3>
+                  <p class="presenters">Lamberthus J. Lokollo; Meytty Jeanly Pattikawa</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>INTL-ABE</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Exploring Impacts of Moroccan Adult Literacy on Women’s Empowerment</h3>
+                  <p class="presenters">Rabia Redouane</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>International Aid and Development: Transformative Learning for an Emerging Future in the Third Sector</h3>
+                  <p class="presenters">Comfort Ninson</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>REVITALIZING NON-FORMAL EDUCATION TO ADDRESS THE OUT-OF-SCHOOL YOUNG ADULT WOMEN CHALLENGES IN NIGERIA</h3>
+                  <p class="presenters">Dare Amusa; Esther Prins</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>INTL-MOD</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Building Bridges of Transformation: Developing a model for the implementation of Recognition of Prior Learning at Community Education and Training Colleges in South Africa</h3>
+                  <p class="presenters">Kaylianne Aploon-Zokufa; Natheem Hendricks</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Encouraging Global Competencies and Transcultural Learning in Turbulent Times</h3>
+                  <p class="presenters">Karen Magro</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>When Training Does Not Translate into Engagement: Institutional Mismatch and Learner Engagement in State-Led Vocational Training Programs in China</h3>
+                  <p class="presenters">Bo Chang</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>ST-PRAXIS</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Considering Critical Praxis with Museum Practitioners</h3>
+                  <p class="presenters">Mary Pinkoski</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Relations of Reproductive and Revolutionary Praxis: Re-Reading Paula Allman through an Emphasis on Form</h3>
+                  <p class="presenters">Sara Carpenter</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Reimagining the Purpose of Education for Social Transformation</h3>
+                  <p class="presenters">Sharmistha Barat; Jafar Iqbal; Astrid Hogmo</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>ENV-R</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-roundtable">Roundtable</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>Decolonizing Climate Action Through Islamic Teachings and Community Building</h3>
+                  <p class="presenters">Maryam Gamar</p>
+                </article>
+
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>Cultivating Adaptive Capacity: A Community of Practice Approach to Drought Education</h3>
+                  <p class="presenters">Jill Zarestky; Lauren Vilen; Emily Lockhard; Retta Bruegger</p>
+                </article>
+
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>Evaluation Training as a Pathway towards Research-Practice Partnerships in Nature-Based Programming</h3>
+                  <p class="presenters">Silvia Terol</p>
+                </article>
+
+              </div>
+            </section>
+
+          </div>
+        </article>
+
+        <article class="time-block event-block" id="may-28-block-1">
+          <time>10:30 - 11:00</time>
+          <div class="event-title">Coffee Break</div>
+        </article>
+
+        <article class="time-block" id="may-28-block-2">
+          <time>11:00 - 12:30</time>
+          <div class="session-grid" style="--session-count: 7">
+            
+            <section class="session-card">
+              <div class="session-meta">
+                <span>S-9</span>
+                <span>1501</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-symposium">Symposium</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-symposium">
+                  <span class="type-badge">Symposium</span>
+                  <h3>Partnership in the Field of Adult Learning and Education for Immigrants in Canada</h3>
+                  <p class="presenters">Hongxia Shan; Jude Walker; Jiin Yoo; Kashif Reza; Afsaneh; Koyali Burman</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>Meth-ETH</span>
+                <span>1505</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Action ethnography’s potential for anti-oppressive research on learning about homelessness</h3>
+                  <p class="presenters">Kathleen Forman</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Mapping Collective Leadership Learning Through Institutional Ethnography: Women, Femme, and Non-Binary Entrepreneurial Collective</h3>
+                  <p class="presenters">Sarah M. Ray</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Building Bridges of Voice: A Critical Review of Photovoice and Translanguaging in Participatory Adult Education Research</h3>
+                  <p class="presenters">Shohreh Shahrouyan</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>IDENT:</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Imagining the Transnational Adoptee diasporic identity and global community</h3>
+                  <p class="presenters">Bliss Wong</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>The Whole Person in the Academy: A New Framework of Becoming for Identity Transformation</h3>
+                  <p class="presenters">Siyi Cheng</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Navigating the First Year: Cultural Identity and Transition Among Southeast Asian Doctoral Students in U.S. Higher Education</h3>
+                  <p class="presenters">Meytty Pattikawa; Jihee Hwang; Junghwan Kim</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>ARTS &amp; C</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Arts-based and Alternative Research Strategies for Crossing Borders and Building Bridges with Community</h3>
+                  <p class="presenters">Roula Kteily-Hawa; Emily Dobrich,; Sarah Flicker; Trevor Hart; Nona Abdallah; Khalil Rantissi,; Lissette Ochoa</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Border-Crossings and Em(body)ed Knowledge: Movement Arts as Community Pedagogy in Adult Education</h3>
+                  <p class="presenters">Dirk J. Rodricks; Annalissa Crisostomo; David Puvaneyswaran</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Cultural Brushstrokes: Using Art to Cross Cultural Boundaries in Adult Education</h3>
+                  
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>AS-4</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-alternative">Alternative</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-alternative">
+                  <span class="type-badge">Alternative</span>
+                  <h3>When Strong Currents Meet: Witnessing and Cultivating the Conditions for Transformative Learning</h3>
+                  <p class="presenters">Lindsay Cole; Alayna Paolini; Rob VanWynsberghe; Laura Kozak</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>AS-5</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-alternative">Alternative</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-alternative">
+                  <span class="type-badge">Alternative</span>
+                  <h3>Crossing borders: morsels from a comic poetic inquiry</h3>
+                  <p class="presenters">Gabriella Maestrini</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>AI</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Algorithmic Public Pedagogy as Border Practice: Learning, Language, and Power in the “TikTok Refugee” Migration to Xiaohongshu</h3>
+                  <p class="presenters">Xun Ril Li</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Narratives of Generative AI and the Graduate Labour Market</h3>
+                  <p class="presenters">Alison Taylor; Kalli McIver</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Reframing the Value of Adult Education in the Age of Artificial Intelligence: Supporting Older Adults’ Digital Inclusion, Mental Well-being, and Social Participation</h3>
+                  <p class="presenters">Yanbo Xie (Alex)</p>
+                </article>
+
+              </div>
+            </section>
+
+          </div>
+        </article>
+
+        <article class="time-block event-block" id="may-28-block-3">
+          <time>12:30 - 2</time>
+          <div class="event-title">Poster session and lunch</div>
+        </article>
+
+        <article class="time-block" id="may-28-block-4">
+          <time>2:00 - 3:00</time>
+          <div class="session-grid" style="--session-count: 7">
+            
+            <section class="session-card">
+              <div class="session-meta">
+                <span>R&amp;P</span>
+                <span>1501</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Imagination and Improvisation in the Pluriverse of Adult Education</h3>
+                  <p class="presenters">Shauna Butterwick; Emily Booker; Amea Wilbur; Suzanne Smythe; Jude Walker</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Silence and other forms of strategic ambiguity in AE research and practice</h3>
+                  <p class="presenters">Katherine Entigar</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>S-6</span>
+                <span>1505</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-symposium">Symposium</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-symposium">
+                  <span class="type-badge">Symposium</span>
+                  <h3>Navigating the AI Revolution in Adult Education</h3>
+                  <p class="presenters">Dawn Hilton; Brad Hilton; Davin Knolton</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>MIL</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Espoused and experienced military culture: The role of informal socialization during basic training</h3>
+                  <p class="presenters">Marshall Gerbrandt</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Faith as a North Star: How Post-9/11 Black Veterans Navigate Military-to-Civilian Transition Through Faith-Based Learning Communities</h3>
+                  <p class="presenters">William Carpenter</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>R-reimagining</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-roundtable">Roundtable</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>Exploring the Potential of Folk Schools in Atlantic Canada</h3>
+                  <p class="presenters">Chris Palmer</p>
+                </article>
+
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>Reimagining Canada in Troubled Times: Transformative Learning as a Bridge to Democratic Practice</h3>
+                  <p class="presenters">Patricia Gouthro; Susan Holloway</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>AS-15</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-alternative">Alternative</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-alternative">
+                  <span class="type-badge">Alternative</span>
+                  <h3>The Importance of Belonging in Adult Education: Interactive Strategies for Inclusive Practice</h3>
+                  <p class="presenters">Rolanda Hardin</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>AS-12</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-alternative">Alternative</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-alternative">
+                  <span class="type-badge">Alternative</span>
+                  <h3>Come Publish with AEQ: A How-to for Practitioners and Emerging Scholars</h3>
+                  <p class="presenters">Edith Gnanadass; Lisa merriweather; Charisse Gulosino; Dianne ramdell</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>CT-COMM</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Dark tourism as self-directed learning</h3>
+                  <p class="presenters">Don Wright</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Festivals as Sites of Learning: The San Pacho Feast and Its Role in Education and Political Resistance</h3>
+                  <p class="presenters">Diana Sanchez; Kathy Sanford</p>
+                </article>
+
+              </div>
+            </section>
+
+          </div>
+        </article>
+
+        <article class="time-block event-block" id="may-28-block-5">
+          <time>3:00 - 3:30</time>
+          <div class="event-title">Coffee Break</div>
+        </article>
+
+        <article class="time-block" id="may-28-block-6">
+          <time>3:30 - 4:00</time>
+          <div class="session-grid" style="--session-count: 7">
+            
+            <section class="session-card">
+              <div class="session-meta">
+                <span>ARTS-ST</span>
+                <span>1501</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Crossing Borders: Public Sculptures and Community Engagement, A Case Study of Castlegar’s Sculpturewalk</h3>
+                  <p class="presenters">Jennifer Cliff-Marks; Carole Roy</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Reviving the Wang-OO: A Community-based Theatre Project Building Bridges between Elders and Young People in Post-Conflict Northern Uganda</h3>
+                  <p class="presenters">Bonnie Fournier; Susan Sommerfeldt; Emily Dobrich; Stéphanie Caron-Roy; Roula Kteily-Hawa</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>SJ-INST</span>
+                <span>1505</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Peer Tutoring in a Women’s Prison: Implications for Tutors’ Self-Perceptions and Experience of Incarceration</h3>
+                  <p class="presenters">Esther Prins; Marcela Movit</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Spatial Reflexivity in Adult Education Institutions: Architecture as an Agent of Accessibility, Inclusion, and Spatial Justice</h3>
+                  <p class="presenters">Katrin Kraus</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>IND-AE</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Balancing studies and life in an indigenous adult education setting</h3>
+                  <p class="presenters">Jean-Pierre Mercier; Jo Anni Joncas; Diane Labelle; Brenda Ross-Jerome; Lorrain Nottaway; Tanu Lusignan</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Towards a Relational Framework in Ecological Civilization Education in China: Insights from Confucianism and Daoism</h3>
+                  <p class="presenters">Shihua Tan</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>TECH</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-roundtable">Roundtable</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>Bridging Eras: Podcasts, Archival Videos, and the Future of Adult Education</h3>
+                  <p class="presenters">Kyle Znamenak; Catherine Hansman; Anthony Adkisson</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>AS-7</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-alternative">Alternative</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-alternative">
+                  <span class="type-badge">Alternative</span>
+                  <h3>The Métis Jig as Embodied Adult Learning: Rhythm Intersection and Building Relationships</h3>
+                  <p class="presenters">Sharon Jarvis</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>ENV-F</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>WOMEN LEARNING LIBERATION: PAN-AFRICAN ECOFEMINIST POPULAR EDUCATORS HONOURING EMBODIED KNOWLEDGE</h3>
+                  <p class="presenters">Shirley Walters</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Wayfinding Pedagogies: Women Seed Keepers and the Reclaiming of Public Life</h3>
+                  <p class="presenters">Claudia Diaz-Diaz; Suyai Neculqueo</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>AS-16</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-alternative">Alternative</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-alternative">
+                  <span class="type-badge">Alternative</span>
+                  <h3>The Role of Dance, Theatre and Film in Critical Pedagogy &amp; Solidarity Learning</h3>
+                  <p class="presenters">Doris Rajan</p>
+                </article>
+
+              </div>
+            </section>
+
+          </div>
+        </article>
+
+        <article class="time-block event-block" id="may-28-block-7">
+          <time>4 - 4:15</time>
+          <div class="event-title">No coffee for you</div>
+        </article>
+
+        <article class="time-block" id="may-28-block-8">
+          <time>4:15 - 5:15</time>
+          <div class="session-grid" style="--session-count: 7">
+            
+            <section class="session-card">
+              <div class="session-meta">
+                <span>ONLINE-GRAD</span>
+                <span>1501</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span><span class="type-badge type-symposium">Symposium</span><span class="type-badge type-roundtable">Roundtable</span><span class="type-badge type-alternative">Alternative</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Developing Scholars Through a Research Apprenticeship Model in an Online PhD Program</h3>
+                  <p class="presenters">Laura Holyoke; Kyle Znamenak</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Reflections on an Online Intercontinental Master’s Program in Adult Learning and Education</h3>
+                  <p class="presenters">Colette February; Emily Dobrich</p>
+                </article>
+
+                <article class="presentation type-symposium">
+                  <span class="type-badge">Symposium</span>
+                  <h3>SYMPOSIUM</h3>
+                  
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>PAPER</h3>
+                  
+                </article>
+
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>ROUNDTABLE</h3>
+                  
+                </article>
+
+                <article class="presentation type-alternative">
+                  <span class="type-badge">Alternative</span>
+                  <h3>ALTERNATIVE SESSIONS</h3>
+                  
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>AS-1</span>
+                <span>1505</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-alternative">Alternative</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-alternative">
+                  <span class="type-badge">Alternative</span>
+                  <h3>Nothing About Us Without Us: Building Bridges with Educator-Student Course Design</h3>
+                  <p class="presenters">KJ Reed; Callum Rivoire; Jenna Sportak; Katie Bacon</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>CARE</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-roundtable">Roundtable</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>Expanding learning within learning health systems</h3>
+                  <p class="presenters">Monique Walsh</p>
+                </article>
+
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>Caring Means Sharing: How Caring Professionals Survive Trauma</h3>
+                  <p class="presenters">Karin Sprow Forté</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>AI-R</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-roundtable">Roundtable</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>Artificial Intelligence (AI) Integrated Learning and Adult Education: Building Bridges across Communities and Contexts</h3>
+                  <p class="presenters">Mekdes Abera</p>
+                </article>
+
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>Toward A Posthumanist Adult Learning and Education in the Era of Generative AI: A Scenario-Based Learning Approach</h3>
+                  <p class="presenters">Eunbi Sim; Youghyun Kim; Beixi Li</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>IMM-R</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-roundtable">Roundtable</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>Accent Reduction to Reflexivity: A Revised Learning Goal for Migrant Professionals</h3>
+                  <p class="presenters">Vijay Ramjattan</p>
+                </article>
+
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>Positionality of Diasporic Women: Voices from the Conflict-Affected Rohingya Community</h3>
+                  <p class="presenters">Jarin Akther</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>AS-6</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-alternative">Alternative</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-alternative">
+                  <span class="type-badge">Alternative</span>
+                  <h3>(Re)collecting and (re)turning to Ourselves: Creative Feminist and Queer Praxes in Adult Learning</h3>
+                  <p class="presenters">Natalia Balystova; Katherine Entigar</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>F</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Comment diminuer les obstacles aux activités d&#x27;apprentissage des 16-24 ans en formation générale des adultes</h3>
+                  <p class="presenters">Jocelyne Chevrier</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Une théorique critique de l’éducation pour appréhender les établissements d’éducation des adultes dans une perspective de justice sociale</h3>
+                  <p class="presenters">Jonathan Martel</p>
+                </article>
+
+              </div>
+            </section>
+
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="day" id="may-29">
+      <div class="day-heading">
+        <div>
+          <h2>May 29</h2>
+        </div>
+      </div>
+      <div class="timeline">
+        
+        <article class="time-block" id="may-29-block-0">
+          <time>9:00 - 10:30</time>
+          <div class="session-grid" style="--session-count: 6">
+            
+            <section class="session-card">
+              <div class="session-meta">
+                <span>Sj-AR</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Reclaiming Adult Learning for Social Change: Voice, Community, and Action in Anti Racism Education in Canada</h3>
+                  <p class="presenters">Jingzhou Liu; Shibao Guo,; Sinela Jurkova</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Roadblocks to Learning: The Experiences of Unhoused Black Men</h3>
+                  <p class="presenters">Olumuyiwa Bamgbose</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>When Bridges Are Burned by Police Brutality: Adult Education as a Catalyst for Black Healing and Transformative Policing Reform</h3>
+                  <p class="presenters">Sam Madesi</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>LIT-R</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-roundtable">Roundtable</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>Economic returns to adult skills in Canada: Evidence from PIAAC</h3>
+                  <p class="presenters">Yilin Pan</p>
+                </article>
+
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>Towards Equitable Access of Ontario&#x27;s Adult Literacy</h3>
+                  <p class="presenters">Lisa Ambaye; Lisa Lozanski</p>
+                </article>
+
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>What is Adult Literacy Education For? A Freirean and Biestan Inquiry into the Adult Literacy Movement in Canada and a Call to Action in Neoliberal Times</h3>
+                  <p class="presenters">Miles Murphy</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>IMM-SET</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>&quot;Our biggest shield has been each other&quot;: Refugee-background students narrating belonging in higher education</h3>
+                  <p class="presenters">Ruth Parrish Sauder</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Bridging the Gap: The Role of Settlement Services in Mediating Collective Learning for Immigrant Parents</h3>
+                  <p class="presenters">Jiin Yoo</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Relational English Learning and Community-Based Settlement in Sydney, Nova Scotia</h3>
+                  <p class="presenters">J. Adam Perry; Susie Brigham</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>S-7</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-symposium">Symposium</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-symposium">
+                  <span class="type-badge">Symposium</span>
+                  <h3>Crossing Practice, Self, and Possibility: Critical Self-Reflection, Autoethnography, and Portfolio Development in Adult Education</h3>
+                  <p class="presenters">Carole Roy; Chrystal Murphy-James,; Michael Reid; Charlie Davidson; Shauna Butterwick (discussant)</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>AS-2</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-alternative">Alternative</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-alternative">
+                  <span class="type-badge">Alternative</span>
+                  <h3>The Story of Us: Building bridges and hopeful futures through collage-making</h3>
+                  <p class="presenters">Ghazal Malik; Chanel Tsang</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>PARTNERSHIP</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Advancing Leadership among Underrepresented Adult Learners in STEM through a Cross-Institutional Research Partnership</h3>
+                  <p class="presenters">Adam L McClain; Stephanie Sisco; Geleana D. Alston; Joshua C. Collins</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Microcredentials as Boundary-Crossing Infrastructure Between Universities and Industry: National Reach from a Rural Continuing Education Unit</h3>
+                  <p class="presenters">Melynda Thorpe</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Negotiating Neutrality: Contradictions between Community Work and Governance in Brownfields Technical Assistance</h3>
+                  
+                </article>
+
+              </div>
+            </section>
+
+          </div>
+        </article>
+
+        <article class="time-block event-block" id="may-29-block-1">
+          <time>10:30 - 11:00</time>
+          <div class="event-title">COFFEE BREAK</div>
+        </article>
+
+        <article class="time-block" id="may-29-block-2">
+          <time>11:00 - 12:30</time>
+          <div class="session-grid" style="--session-count: 7">
+            
+            <section class="session-card">
+              <div class="session-meta">
+                <span>S-4</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-symposium">Symposium</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-symposium">
+                  <span class="type-badge">Symposium</span>
+                  <h3>Crossing the School-Home Border: Reconceptualizing Parent Engagement as Democratic Adult Learning and Community Organizing</h3>
+                  <p class="presenters">Max Anthony Newman; Yan Guo; Jiin Yoo,; Bridget Murphy; Mayra Sarabia; Iyabo Anifowoshe</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>AS-8</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-alternative">Alternative</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-alternative">
+                  <span class="type-badge">Alternative</span>
+                  <h3>The Untapped Potential of Peer Learning in Professional Development</h3>
+                  <p class="presenters">Carrie Malloy; Lisa Lozanski</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>AL</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Crossing Language Borders: How Public Rules and Private Resources Shape Adult Learners’ Pathways</h3>
+                  <p class="presenters">Jim Y Huang</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>How Poverty Simulations Affect Social Empathy in Adult Learners</h3>
+                  <p class="presenters">Rebecca Davison</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>The Potential and Power of Adult Learning Opportunities in Unexpected Places: A case study of parent and caregiver learning in an Ontario EarlyON Child and Family Centre</h3>
+                  <p class="presenters">Chanel Tsang</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>TL</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-roundtable">Roundtable</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>Transformative Learning in The Ladder, A Lesbian Magazine</h3>
+                  <p class="presenters">Lisa M Baumgartner</p>
+                </article>
+
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>Transformative Learning on a Continuum: Revisiting the Disorienting Dilemma through Multidimensional Lenses</h3>
+                  <p class="presenters">Natalia Bussard; Jude Walker; Dan Jordan</p>
+                </article>
+
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>Deconstructing epistemic fragility: Advancing the theoretical framework</h3>
+                  
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>MENT</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-roundtable">Roundtable</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>(Re)Membering Matter in Intergenerational Learning: From Inter- to Intra-generational Encounters</h3>
+                  <p class="presenters">Younghyun Kim</p>
+                </article>
+
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>An Academic Borderland: Deconstructing University Hierarchies through an Arts-Based Professor-Student Research Collective</h3>
+                  <p class="presenters">Chase Thomson; Annalissa Crisostomo; Keith Cheng; Dirk J Rodricks</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>COMM-P</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Learning Feminist Asset-Based Community-Led Development through a Transnational Partnership</h3>
+                  <p class="presenters">Wellington Sousa</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Disciplining a community, professionalizing a sector: Examining Australia’s NGO sector.</h3>
+                  <p class="presenters">Genevieve Ritchie</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Research Into Practice: Using Caring Conversations to Build Bridges in Complex Institutions</h3>
+                  <p class="presenters">Morgan Westcott</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>AS-9</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-alternative">Alternative</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-alternative">
+                  <span class="type-badge">Alternative</span>
+                  <h3>The Benefits and Risks of Welcome Practices</h3>
+                  <p class="presenters">Spring Gillard; Shauna Butterwick</p>
+                </article>
+
+              </div>
+            </section>
+
+          </div>
+        </article>
+
+        <article class="time-block event-block" id="may-29-block-3">
+          <time>12:30 - 2:30</time>
+          <div class="event-title">Lunch, joint award ceremony, &amp; respective AGMs</div>
+        </article>
+
+        <article class="time-block" id="may-29-block-4">
+          <time>2:00 - 3:30</time>
+          <div class="session-grid" style="--session-count: 7">
+            
+            <section class="session-card">
+              <div class="session-meta">
+                <span>AS-11</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-alternative">Alternative</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-alternative">
+                  <span class="type-badge">Alternative</span>
+                  <h3>Experiential Learning: Using Monopoly to Teach About Social Justice</h3>
+                  <p class="presenters">Dr. Monica Himes; Rebecca Davison</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>AS-18</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-alternative">Alternative</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-alternative">
+                  <span class="type-badge">Alternative</span>
+                  <h3>Persona-making in Adult Education</h3>
+                  <p class="presenters">Nic Dickson</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>IMM</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-roundtable">Roundtable</span><span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>Learning Across Borders: Arts-Based Autoethnography as Lifelong Adult Learning in Contexts of Migration</h3>
+                  <p class="presenters">Nurgul Balac</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Epistemological Regionalism and the Failure of Mobility</h3>
+                  <p class="presenters">Ralf St. Clair</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Peripheral Citizenship: Chinese Immigrants Negotiating Legitimate Ways of Democratic Participation through Quotidian Activisms across Borders</h3>
+                  <p class="presenters">Ling Lei; Shibao Guo</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>CARE-R</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-roundtable">Roundtable</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>Building Collective Capacity Through Crisis-Informed Financial Literacy: Connecting Research with Practice to Cultivate Communities of Learning and Hope</h3>
+                  <p class="presenters">Sandra Roussel</p>
+                </article>
+
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>EDUCATING FOR THE END IN RURAL NOVA SCOTIA: LEARNING HOW TO DIE IN PLACE AT HOME</h3>
+                  <p class="presenters">Emily Mansour-Hemlow</p>
+                </article>
+
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>Trauma-Informed and Care-Based Pedagogy in Adult Education: Synthesizing Faculty and Learner Perspectives</h3>
+                  <p class="presenters">Brianna Strumm; Amea Wilbur,; Elizabeth Sallos</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>ENV-V</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Pre-service Teachers’ Sustainability Competencies Development through the Social Production of Space: A Qualitative Case Study</h3>
+                  <p class="presenters">Yijing Lyu</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Relationships as Resistance: Transformative Adult Learning in the Climate Justice Movement</h3>
+                  <p class="presenters">Sheena Cameron</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>A Scoping Review of Informal and Nonformal Adult Environmental and Sustainability Education Research: Relevance and Implications for the Research Community</h3>
+                  <p class="presenters">Lauren Vilen</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>ONLINE-OTHER</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Andragogy in the age of online learning: Rethinking how the technology effects community</h3>
+                  <p class="presenters">Amanda Benjamin; Marshall Gerbrandt; Kendra Haines</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Building Bridges in Synchronous Hybrid Learning Spaces – Cross-sectoral insights into Educators’ Experiences and Negotiation Practices of Ruptures in Adult and Higher Education</h3>
+                  <p class="presenters">Lisa Breitschwerdt; Christina Hümmer; Marie Rathmann</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>The Human MOSAIC: Connection and Community as Online Learning Ecosystem Health in Adult Graduate Education</h3>
+                  
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>JOURNAL SESSION</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-alternative">Alternative</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-alternative">
+                  <span class="type-badge">Alternative</span>
+                  <h3>Intro to the journals</h3>
+                  
+                </article>
+
+              </div>
+            </section>
+
+          </div>
+        </article>
+
+        <article class="time-block event-block" id="may-29-block-5">
+          <time>3:30 - 4:00</time>
+          <div class="event-title">Break</div>
+        </article>
+
+        <article class="time-block" id="may-29-block-6">
+          <time>3:45 - 4:45</time>
+          <div class="session-grid" style="--session-count: 7">
+            
+            <section class="session-card">
+              <div class="session-meta">
+                <span>METH-SJ</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Refusing Silence: Collaborative Autoethnography on Navigating Race, Gender, and Resistance in Higher Education</h3>
+                  <p class="presenters">Mitsunori Misawa</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>The transformative potential of embodied journaling in critical social justice education</h3>
+                  <p class="presenters">Stephanie Glick; Micah Favel; Nina Gaind; Arianna Valentino</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>IMM-INTL</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Program Planning in Adult Education for Migrant Integration in Korea: A Diagnostic Inquiry into a Corporate Social Value Initiative</h3>
+                  <p class="presenters">Romee Lee; Sukki Kong</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Researching nonformal learning places as a possibility for supporting the social participation of Migrants in Germany</h3>
+                  <p class="presenters">Christiane Hof</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>IND-D</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Decolonization in Adult Education: A Scoping Review Through East Asian and AsianCrit Perspectives</h3>
+                  <p class="presenters">Hye-Su Kuk; Eunbi Sim</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Teaching Canadian Citizenship on Unceded Land: Educators and the Downloading of Reconciliation</h3>
+                  <p class="presenters">Lisa Ruth Brunner</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>AS-13</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-alternative">Alternative</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-alternative">
+                  <span class="type-badge">Alternative</span>
+                  <h3>Critical Discourse: Mapping the Terrain of Modern Adult Education</h3>
+                  <p class="presenters">Inna Kerlin</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>AS-14</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-alternative">Alternative</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-alternative">
+                  <span class="type-badge">Alternative</span>
+                  <h3>Circles of Influence: Practicing Organizational Justice With and For Adult Learners</h3>
+                  <p class="presenters">Makena Neal; Alicia Jenner; Patricia Stewart</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>AS-17</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-alternative">Alternative</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-alternative">
+                  <span class="type-badge">Alternative</span>
+                  <h3>Embodied Wisdom in Action: Harnessing Living Experience to Guide Service and Learning</h3>
+                  <p class="presenters">Elizabeth Bishop</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>AS-19</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-alternative">Alternative</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-alternative">
+                  <span class="type-badge">Alternative</span>
+                  <h3>Transformational Change: Identity, Self-Image, and Adult Learning in Times of Transition</h3>
+                  <p class="presenters">Susan A. McDonald</p>
+                </article>
+
+              </div>
+            </section>
+
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="day" id="may-30">
+      <div class="day-heading">
+        <div>
+          <h2>May 30</h2>
+        </div>
+      </div>
+      <div class="timeline">
+        
+        <article class="time-block" id="may-30-block-0">
+          <time>9:00 - 10:30</time>
+          <div class="session-grid" style="--session-count: 4">
+            
+            <section class="session-card">
+              <div class="session-meta">
+                <span>S-5</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-symposium">Symposium</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-symposium">
+                  <span class="type-badge">Symposium</span>
+                  <h3>Beyond Borders: Researching Transnational Mobility and Adult Education</h3>
+                  <p class="presenters">Shibao Guo; Hongxia Shan, ,; Susie Brigham; Yan Guo</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>S-8</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-symposium">Symposium</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-symposium">
+                  <span class="type-badge">Symposium</span>
+                  <h3>Feminist Adult Education Across Contexts: Exploring Theory and Practice in Different Spaces, Places and Communities</h3>
+                  <p class="presenters">Emily Dobrich; Shauna Butterwick; Catherine Etmanski; Shirley Walters; Robin Sarkar; Swati Krishnan; Racheal Kalaba; Deepti Mahajan</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>AS-3</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-alternative">Alternative</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-alternative">
+                  <span class="type-badge">Alternative</span>
+                  <h3>A Decolonial Learning Workshop Using Erasure Poetry</h3>
+                  <p class="presenters">Gitanjaly Chhabra; Kay Hare</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>S-3</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-symposium">Symposium</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-symposium">
+                  <span class="type-badge">Symposium</span>
+                  <h3>Adult Education in Health Contexts: Relational Learning, Hidden Labour, and Boundary-Crossing Work</h3>
+                  <p class="presenters">Jonathan Easey; Jude Walker; Carrie Krekoski; Penny Hatzimanolakis</p>
+                </article>
+
+              </div>
+            </section>
+
+          </div>
+        </article>
+
+        <article class="time-block" id="may-30-block-1">
+          <time>11 - 12pm</time>
+          <div class="session-grid" style="--session-count: 3">
+            
+            <section class="session-card">
+              <div class="session-meta">
+                <span>SML</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>From Fandom to Civic Agency: Social Movement Learning among K-pop Fandom at South Korea’s ‘Light Revolution’</h3>
+                  <p class="presenters">Kwankyeung Kwak; Joon Heo</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Social Change Creativity as a Useful Complement to Social Movement Learning</h3>
+                  <p class="presenters">Catherine Etmanski; Amy Zidulka</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>WOMEN</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-roundtable">Roundtable</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-roundtable">
+                  <span class="type-badge">Roundtable</span>
+                  <h3>“Where Hope Blooms: Appreciative Inquiry Approach Case Study into Educational Practices of Feminist Organizations”; Roundtable Discussion about Feminist Pedagogies in Practice and Feminist Approaches to Inclusive Workplaces.</h3>
+                  <p class="presenters">Joanna Stewart</p>
+                </article>
+
+              </div>
+            </section>
+
+            <section class="session-card">
+              <div class="session-meta">
+                <span>POLICY</span>
+                <span>TBA</span>
+              </div>
+              <div class="compact-type-list">
+                <span class="type-badge type-paper">Paper</span>
+              </div>
+              <div class="presentation-list">
+                
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Pan-Canadian Adult Education Policy Development? Lessons from a European Union Case Study</h3>
+                  <p class="presenters">Robert McGray; Marie Ritche</p>
+                </article>
+
+                <article class="presentation type-paper">
+                  <span class="type-badge">Paper</span>
+                  <h3>Philosophies, Policies, and Practices: Navigating Lifelong Learning Systems in the U.S. and Europe</h3>
+                  <p class="presenters">Christy Rhodes; Judith Alamprese</p>
+                </article>
+
+              </div>
+            </section>
+
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const scheduleData = [
+  {
+    "title": "May 28",
+    "id": "may-28",
+    "date": "2026-05-28",
+    "blocks": [
+      {
+        "kind": "sessions",
+        "time": "9:00 - 10:30",
+        "startMinutes": 540,
+        "endMinutes": 630,
+        "sessions": [
+          {
+            "code": "S-1",
+            "room": "1501",
+            "items": [
+              {
+                "title": "Navigating Boundaries, Building Bridges: Adult Education Pathways for Immigrant and Non-Traditional Learners",
+                "type": "symposium",
+                "typeLabel": "Symposium",
+                "presenters": [
+                  "Kashif Raza",
+                  "Randolph Wimmer",
+                  "Danielle Gardiner Milln",
+                  "David Burns",
+                  "Josephine Chan",
+                  "Carolyn MacLaren"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "S-2",
+            "room": "1505",
+            "items": [
+              {
+                "title": "Supporting a National Literacy Strategy: Researcher Insights and Considerations from the Adult Literacy SIG",
+                "type": "symposium",
+                "typeLabel": "Symposium",
+                "presenters": [
+                  "Stacey Crooks",
+                  "Paula Elias",
+                  "Hannah Peters",
+                  "Annie Luk",
+                  "Miles Murphy",
+                  "Jude Walker"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "WORK",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "An Exploration of Korean Millennials’ Career Transitions",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Yeonjoo Kim"
+                ]
+              },
+              {
+                "title": "Adult Learning for Climate Action and the Future of Work in Australia: A Capability Approach Analysis",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Lamberthus J. Lokollo",
+                  "Meytty Jeanly Pattikawa"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "INTL-ABE",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Exploring Impacts of Moroccan Adult Literacy on Women’s Empowerment",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Rabia Redouane"
+                ]
+              },
+              {
+                "title": "International Aid and Development: Transformative Learning for an Emerging Future in the Third Sector",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Comfort Ninson"
+                ]
+              },
+              {
+                "title": "REVITALIZING NON-FORMAL EDUCATION TO ADDRESS THE OUT-OF-SCHOOL YOUNG ADULT WOMEN CHALLENGES IN NIGERIA",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Dare Amusa",
+                  "Esther Prins"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "INTL-MOD",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Building Bridges of Transformation: Developing a model for the implementation of Recognition of Prior Learning at Community Education and Training Colleges in South Africa",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Kaylianne Aploon-Zokufa",
+                  "Natheem Hendricks"
+                ]
+              },
+              {
+                "title": "Encouraging Global Competencies and Transcultural Learning in Turbulent Times",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Karen Magro"
+                ]
+              },
+              {
+                "title": "When Training Does Not Translate into Engagement: Institutional Mismatch and Learner Engagement in State-Led Vocational Training Programs in China",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Bo Chang"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "ST-PRAXIS",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Considering Critical Praxis with Museum Practitioners",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Mary Pinkoski"
+                ]
+              },
+              {
+                "title": "Relations of Reproductive and Revolutionary Praxis: Re-Reading Paula Allman through an Emphasis on Form",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Sara Carpenter"
+                ]
+              },
+              {
+                "title": "Reimagining the Purpose of Education for Social Transformation",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Sharmistha Barat",
+                  "Jafar Iqbal",
+                  "Astrid Hogmo"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "ENV-R",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Decolonizing Climate Action Through Islamic Teachings and Community Building",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": [
+                  "Maryam Gamar"
+                ]
+              },
+              {
+                "title": "Cultivating Adaptive Capacity: A Community of Practice Approach to Drought Education",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": [
+                  "Jill Zarestky",
+                  "Lauren Vilen",
+                  "Emily Lockhard",
+                  "Retta Bruegger"
+                ]
+              },
+              {
+                "title": "Evaluation Training as a Pathway towards Research-Practice Partnerships in Nature-Based Programming",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": [
+                  "Silvia Terol"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "event",
+        "time": "10:30 - 11:00",
+        "startMinutes": 630,
+        "endMinutes": 660,
+        "title": "Coffee Break"
+      },
+      {
+        "kind": "sessions",
+        "time": "11:00 - 12:30",
+        "startMinutes": 660,
+        "endMinutes": 750,
+        "sessions": [
+          {
+            "code": "S-9",
+            "room": "1501",
+            "items": [
+              {
+                "title": "Partnership in the Field of Adult Learning and Education for Immigrants in Canada",
+                "type": "symposium",
+                "typeLabel": "Symposium",
+                "presenters": [
+                  "Hongxia Shan",
+                  "Jude Walker",
+                  "Jiin Yoo",
+                  "Kashif Reza",
+                  "Afsaneh",
+                  "Koyali Burman"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "Meth-ETH",
+            "room": "1505",
+            "items": [
+              {
+                "title": "Action ethnography’s potential for anti-oppressive research on learning about homelessness",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Kathleen Forman"
+                ]
+              },
+              {
+                "title": "Mapping Collective Leadership Learning Through Institutional Ethnography: Women, Femme, and Non-Binary Entrepreneurial Collective",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Sarah M. Ray"
+                ]
+              },
+              {
+                "title": "Building Bridges of Voice: A Critical Review of Photovoice and Translanguaging in Participatory Adult Education Research",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Shohreh Shahrouyan"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "IDENT:",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Imagining the Transnational Adoptee diasporic identity and global community",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Bliss Wong"
+                ]
+              },
+              {
+                "title": "The Whole Person in the Academy: A New Framework of Becoming for Identity Transformation",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Siyi Cheng"
+                ]
+              },
+              {
+                "title": "Navigating the First Year: Cultural Identity and Transition Among Southeast Asian Doctoral Students in U.S. Higher Education",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Meytty Pattikawa",
+                  "Jihee Hwang",
+                  "Junghwan Kim"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "ARTS & C",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Arts-based and Alternative Research Strategies for Crossing Borders and Building Bridges with Community",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Roula Kteily-Hawa",
+                  "Emily Dobrich,",
+                  "Sarah Flicker",
+                  "Trevor Hart",
+                  "Nona Abdallah",
+                  "Khalil Rantissi,",
+                  "Lissette Ochoa"
+                ]
+              },
+              {
+                "title": "Border-Crossings and Em(body)ed Knowledge: Movement Arts as Community Pedagogy in Adult Education",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Dirk J. Rodricks",
+                  "Annalissa Crisostomo",
+                  "David Puvaneyswaran"
+                ]
+              },
+              {
+                "title": "Cultural Brushstrokes: Using Art to Cross Cultural Boundaries in Adult Education",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": []
+              }
+            ]
+          },
+          {
+            "code": "AS-4",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "When Strong Currents Meet: Witnessing and Cultivating the Conditions for Transformative Learning",
+                "type": "alternative",
+                "typeLabel": "Alternative",
+                "presenters": [
+                  "Lindsay Cole",
+                  "Alayna Paolini",
+                  "Rob VanWynsberghe",
+                  "Laura Kozak"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "AS-5",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Crossing borders: morsels from a comic poetic inquiry",
+                "type": "alternative",
+                "typeLabel": "Alternative",
+                "presenters": [
+                  "Gabriella Maestrini"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "AI",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Algorithmic Public Pedagogy as Border Practice: Learning, Language, and Power in the “TikTok Refugee” Migration to Xiaohongshu",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Xun Ril Li"
+                ]
+              },
+              {
+                "title": "Narratives of Generative AI and the Graduate Labour Market",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Alison Taylor",
+                  "Kalli McIver"
+                ]
+              },
+              {
+                "title": "Reframing the Value of Adult Education in the Age of Artificial Intelligence: Supporting Older Adults’ Digital Inclusion, Mental Well-being, and Social Participation",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Yanbo Xie (Alex)"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "event",
+        "time": "12:30 - 2",
+        "startMinutes": 750,
+        "endMinutes": 840,
+        "title": "Poster session and lunch"
+      },
+      {
+        "kind": "sessions",
+        "time": "2:00 - 3:00",
+        "startMinutes": 840,
+        "endMinutes": 900,
+        "sessions": [
+          {
+            "code": "R&P",
+            "room": "1501",
+            "items": [
+              {
+                "title": "Imagination and Improvisation in the Pluriverse of Adult Education",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Shauna Butterwick",
+                  "Emily Booker",
+                  "Amea Wilbur",
+                  "Suzanne Smythe",
+                  "Jude Walker"
+                ]
+              },
+              {
+                "title": "Silence and other forms of strategic ambiguity in AE research and practice",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Katherine Entigar"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "S-6",
+            "room": "1505",
+            "items": [
+              {
+                "title": "Navigating the AI Revolution in Adult Education",
+                "type": "symposium",
+                "typeLabel": "Symposium",
+                "presenters": [
+                  "Dawn Hilton",
+                  "Brad Hilton",
+                  "Davin Knolton"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "MIL",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Espoused and experienced military culture: The role of informal socialization during basic training",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Marshall Gerbrandt"
+                ]
+              },
+              {
+                "title": "Faith as a North Star: How Post-9/11 Black Veterans Navigate Military-to-Civilian Transition Through Faith-Based Learning Communities",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "William Carpenter"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "R-reimagining",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Exploring the Potential of Folk Schools in Atlantic Canada",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": [
+                  "Chris Palmer"
+                ]
+              },
+              {
+                "title": "Reimagining Canada in Troubled Times: Transformative Learning as a Bridge to Democratic Practice",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": [
+                  "Patricia Gouthro",
+                  "Susan Holloway"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "AS-15",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "The Importance of Belonging in Adult Education: Interactive Strategies for Inclusive Practice",
+                "type": "alternative",
+                "typeLabel": "Alternative",
+                "presenters": [
+                  "Rolanda Hardin"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "AS-12",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Come Publish with AEQ: A How-to for Practitioners and Emerging Scholars",
+                "type": "alternative",
+                "typeLabel": "Alternative",
+                "presenters": [
+                  "Edith Gnanadass",
+                  "Lisa merriweather",
+                  "Charisse Gulosino",
+                  "Dianne ramdell"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "CT-COMM",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Dark tourism as self-directed learning",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Don Wright"
+                ]
+              },
+              {
+                "title": "Festivals as Sites of Learning: The San Pacho Feast and Its Role in Education and Political Resistance",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Diana Sanchez",
+                  "Kathy Sanford"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "event",
+        "time": "3:00 - 3:30",
+        "startMinutes": 900,
+        "endMinutes": 930,
+        "title": "Coffee Break"
+      },
+      {
+        "kind": "sessions",
+        "time": "3:30 - 4:00",
+        "startMinutes": 930,
+        "endMinutes": 960,
+        "sessions": [
+          {
+            "code": "ARTS-ST",
+            "room": "1501",
+            "items": [
+              {
+                "title": "Crossing Borders: Public Sculptures and Community Engagement, A Case Study of Castlegar’s Sculpturewalk",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Jennifer Cliff-Marks",
+                  "Carole Roy"
+                ]
+              },
+              {
+                "title": "Reviving the Wang-OO: A Community-based Theatre Project Building Bridges between Elders and Young People in Post-Conflict Northern Uganda",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Bonnie Fournier",
+                  "Susan Sommerfeldt",
+                  "Emily Dobrich",
+                  "Stéphanie Caron-Roy",
+                  "Roula Kteily-Hawa"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "SJ-INST",
+            "room": "1505",
+            "items": [
+              {
+                "title": "Peer Tutoring in a Women’s Prison: Implications for Tutors’ Self-Perceptions and Experience of Incarceration",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Esther Prins",
+                  "Marcela Movit"
+                ]
+              },
+              {
+                "title": "Spatial Reflexivity in Adult Education Institutions: Architecture as an Agent of Accessibility, Inclusion, and Spatial Justice",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Katrin Kraus"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "IND-AE",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Balancing studies and life in an indigenous adult education setting",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Jean-Pierre Mercier",
+                  "Jo Anni Joncas",
+                  "Diane Labelle",
+                  "Brenda Ross-Jerome",
+                  "Lorrain Nottaway",
+                  "Tanu Lusignan"
+                ]
+              },
+              {
+                "title": "Towards a Relational Framework in Ecological Civilization Education in China: Insights from Confucianism and Daoism",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Shihua Tan"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "TECH",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Bridging Eras: Podcasts, Archival Videos, and the Future of Adult Education",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": [
+                  "Kyle Znamenak",
+                  "Catherine Hansman",
+                  "Anthony Adkisson"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "AS-7",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "The Métis Jig as Embodied Adult Learning: Rhythm Intersection and Building Relationships",
+                "type": "alternative",
+                "typeLabel": "Alternative",
+                "presenters": [
+                  "Sharon Jarvis"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "ENV-F",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "WOMEN LEARNING LIBERATION: PAN-AFRICAN ECOFEMINIST POPULAR EDUCATORS HONOURING EMBODIED KNOWLEDGE",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Shirley Walters"
+                ]
+              },
+              {
+                "title": "Wayfinding Pedagogies: Women Seed Keepers and the Reclaiming of Public Life",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Claudia Diaz-Diaz",
+                  "Suyai Neculqueo"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "AS-16",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "The Role of Dance, Theatre and Film in Critical Pedagogy & Solidarity Learning",
+                "type": "alternative",
+                "typeLabel": "Alternative",
+                "presenters": [
+                  "Doris Rajan"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "event",
+        "time": "4 - 4:15",
+        "startMinutes": 960,
+        "endMinutes": 975,
+        "title": "No coffee for you"
+      },
+      {
+        "kind": "sessions",
+        "time": "4:15 - 5:15",
+        "startMinutes": 975,
+        "endMinutes": 1035,
+        "sessions": [
+          {
+            "code": "ONLINE-GRAD",
+            "room": "1501",
+            "items": [
+              {
+                "title": "Developing Scholars Through a Research Apprenticeship Model in an Online PhD Program",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Laura Holyoke",
+                  "Kyle Znamenak"
+                ]
+              },
+              {
+                "title": "Reflections on an Online Intercontinental Master’s Program in Adult Learning and Education",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Colette February",
+                  "Emily Dobrich"
+                ]
+              },
+              {
+                "title": "SYMPOSIUM",
+                "type": "symposium",
+                "typeLabel": "Symposium",
+                "presenters": []
+              },
+              {
+                "title": "PAPER",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": []
+              },
+              {
+                "title": "ROUNDTABLE",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": []
+              },
+              {
+                "title": "ALTERNATIVE SESSIONS",
+                "type": "alternative",
+                "typeLabel": "Alternative",
+                "presenters": []
+              }
+            ]
+          },
+          {
+            "code": "AS-1",
+            "room": "1505",
+            "items": [
+              {
+                "title": "Nothing About Us Without Us: Building Bridges with Educator-Student Course Design",
+                "type": "alternative",
+                "typeLabel": "Alternative",
+                "presenters": [
+                  "KJ Reed",
+                  "Callum Rivoire",
+                  "Jenna Sportak",
+                  "Katie Bacon"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "CARE",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Expanding learning within learning health systems",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": [
+                  "Monique Walsh"
+                ]
+              },
+              {
+                "title": "Caring Means Sharing: How Caring Professionals Survive Trauma",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": [
+                  "Karin Sprow Forté"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "AI-R",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Artificial Intelligence (AI) Integrated Learning and Adult Education: Building Bridges across Communities and Contexts",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": [
+                  "Mekdes Abera"
+                ]
+              },
+              {
+                "title": "Toward A Posthumanist Adult Learning and Education in the Era of Generative AI: A Scenario-Based Learning Approach",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": [
+                  "Eunbi Sim",
+                  "Youghyun Kim",
+                  "Beixi Li"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "IMM-R",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Accent Reduction to Reflexivity: A Revised Learning Goal for Migrant Professionals",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": [
+                  "Vijay Ramjattan"
+                ]
+              },
+              {
+                "title": "Positionality of Diasporic Women: Voices from the Conflict-Affected Rohingya Community",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": [
+                  "Jarin Akther"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "AS-6",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "(Re)collecting and (re)turning to Ourselves: Creative Feminist and Queer Praxes in Adult Learning",
+                "type": "alternative",
+                "typeLabel": "Alternative",
+                "presenters": [
+                  "Natalia Balystova",
+                  "Katherine Entigar"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "F",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Comment diminuer les obstacles aux activités d'apprentissage des 16-24 ans en formation générale des adultes",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Jocelyne Chevrier"
+                ]
+              },
+              {
+                "title": "Une théorique critique de l’éducation pour appréhender les établissements d’éducation des adultes dans une perspective de justice sociale",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Jonathan Martel"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "sessionCount": 35
+  },
+  {
+    "title": "May 29",
+    "id": "may-29",
+    "date": "2026-05-29",
+    "blocks": [
+      {
+        "kind": "sessions",
+        "time": "9:00 - 10:30",
+        "startMinutes": 540,
+        "endMinutes": 630,
+        "sessions": [
+          {
+            "code": "Sj-AR",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Reclaiming Adult Learning for Social Change: Voice, Community, and Action in Anti Racism Education in Canada",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Jingzhou Liu",
+                  "Shibao Guo,",
+                  "Sinela Jurkova"
+                ]
+              },
+              {
+                "title": "Roadblocks to Learning: The Experiences of Unhoused Black Men",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Olumuyiwa Bamgbose"
+                ]
+              },
+              {
+                "title": "When Bridges Are Burned by Police Brutality: Adult Education as a Catalyst for Black Healing and Transformative Policing Reform",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Sam Madesi"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "LIT-R",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Economic returns to adult skills in Canada: Evidence from PIAAC",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": [
+                  "Yilin Pan"
+                ]
+              },
+              {
+                "title": "Towards Equitable Access of Ontario's Adult Literacy",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": [
+                  "Lisa Ambaye",
+                  "Lisa Lozanski"
+                ]
+              },
+              {
+                "title": "What is Adult Literacy Education For? A Freirean and Biestan Inquiry into the Adult Literacy Movement in Canada and a Call to Action in Neoliberal Times",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": [
+                  "Miles Murphy"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "IMM-SET",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "\"Our biggest shield has been each other\": Refugee-background students narrating belonging in higher education",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Ruth Parrish Sauder"
+                ]
+              },
+              {
+                "title": "Bridging the Gap: The Role of Settlement Services in Mediating Collective Learning for Immigrant Parents",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Jiin Yoo"
+                ]
+              },
+              {
+                "title": "Relational English Learning and Community-Based Settlement in Sydney, Nova Scotia",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "J. Adam Perry",
+                  "Susie Brigham"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "S-7",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Crossing Practice, Self, and Possibility: Critical Self-Reflection, Autoethnography, and Portfolio Development in Adult Education",
+                "type": "symposium",
+                "typeLabel": "Symposium",
+                "presenters": [
+                  "Carole Roy",
+                  "Chrystal Murphy-James,",
+                  "Michael Reid",
+                  "Charlie Davidson",
+                  "Shauna Butterwick (discussant)"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "AS-2",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "The Story of Us: Building bridges and hopeful futures through collage-making",
+                "type": "alternative",
+                "typeLabel": "Alternative",
+                "presenters": [
+                  "Ghazal Malik",
+                  "Chanel Tsang"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "PARTNERSHIP",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Advancing Leadership among Underrepresented Adult Learners in STEM through a Cross-Institutional Research Partnership",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Adam L McClain",
+                  "Stephanie Sisco",
+                  "Geleana D. Alston",
+                  "Joshua C. Collins"
+                ]
+              },
+              {
+                "title": "Microcredentials as Boundary-Crossing Infrastructure Between Universities and Industry: National Reach from a Rural Continuing Education Unit",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Melynda Thorpe"
+                ]
+              },
+              {
+                "title": "Negotiating Neutrality: Contradictions between Community Work and Governance in Brownfields Technical Assistance",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "event",
+        "time": "10:30 - 11:00",
+        "startMinutes": 630,
+        "endMinutes": 660,
+        "title": "COFFEE BREAK"
+      },
+      {
+        "kind": "sessions",
+        "time": "11:00 - 12:30",
+        "startMinutes": 660,
+        "endMinutes": 750,
+        "sessions": [
+          {
+            "code": "S-4",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Crossing the School-Home Border: Reconceptualizing Parent Engagement as Democratic Adult Learning and Community Organizing",
+                "type": "symposium",
+                "typeLabel": "Symposium",
+                "presenters": [
+                  "Max Anthony Newman",
+                  "Yan Guo",
+                  "Jiin Yoo,",
+                  "Bridget Murphy",
+                  "Mayra Sarabia",
+                  "Iyabo Anifowoshe"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "AS-8",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "The Untapped Potential of Peer Learning in Professional Development",
+                "type": "alternative",
+                "typeLabel": "Alternative",
+                "presenters": [
+                  "Carrie Malloy",
+                  "Lisa Lozanski"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "AL",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Crossing Language Borders: How Public Rules and Private Resources Shape Adult Learners’ Pathways",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Jim Y Huang"
+                ]
+              },
+              {
+                "title": "How Poverty Simulations Affect Social Empathy in Adult Learners",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Rebecca Davison"
+                ]
+              },
+              {
+                "title": "The Potential and Power of Adult Learning Opportunities in Unexpected Places: A case study of parent and caregiver learning in an Ontario EarlyON Child and Family Centre",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Chanel Tsang"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "TL",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Transformative Learning in The Ladder, A Lesbian Magazine",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": [
+                  "Lisa M Baumgartner"
+                ]
+              },
+              {
+                "title": "Transformative Learning on a Continuum: Revisiting the Disorienting Dilemma through Multidimensional Lenses",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": [
+                  "Natalia Bussard",
+                  "Jude Walker",
+                  "Dan Jordan"
+                ]
+              },
+              {
+                "title": "Deconstructing epistemic fragility: Advancing the theoretical framework",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": []
+              }
+            ]
+          },
+          {
+            "code": "MENT",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "(Re)Membering Matter in Intergenerational Learning: From Inter- to Intra-generational Encounters",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": [
+                  "Younghyun Kim"
+                ]
+              },
+              {
+                "title": "An Academic Borderland: Deconstructing University Hierarchies through an Arts-Based Professor-Student Research Collective",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": [
+                  "Chase Thomson",
+                  "Annalissa Crisostomo",
+                  "Keith Cheng",
+                  "Dirk J Rodricks"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "COMM-P",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Learning Feminist Asset-Based Community-Led Development through a Transnational Partnership",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Wellington Sousa"
+                ]
+              },
+              {
+                "title": "Disciplining a community, professionalizing a sector: Examining Australia’s NGO sector.",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Genevieve Ritchie"
+                ]
+              },
+              {
+                "title": "Research Into Practice: Using Caring Conversations to Build Bridges in Complex Institutions",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Morgan Westcott"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "AS-9",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "The Benefits and Risks of Welcome Practices",
+                "type": "alternative",
+                "typeLabel": "Alternative",
+                "presenters": [
+                  "Spring Gillard",
+                  "Shauna Butterwick"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "event",
+        "time": "12:30 - 2:30",
+        "startMinutes": 750,
+        "endMinutes": 870,
+        "title": "Lunch, joint award ceremony, & respective AGMs"
+      },
+      {
+        "kind": "sessions",
+        "time": "2:00 - 3:30",
+        "startMinutes": 840,
+        "endMinutes": 930,
+        "sessions": [
+          {
+            "code": "AS-11",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Experiential Learning: Using Monopoly to Teach About Social Justice",
+                "type": "alternative",
+                "typeLabel": "Alternative",
+                "presenters": [
+                  "Dr. Monica Himes",
+                  "Rebecca Davison"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "AS-18",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Persona-making in Adult Education",
+                "type": "alternative",
+                "typeLabel": "Alternative",
+                "presenters": [
+                  "Nic Dickson"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "IMM",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Learning Across Borders: Arts-Based Autoethnography as Lifelong Adult Learning in Contexts of Migration",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": [
+                  "Nurgul Balac"
+                ]
+              },
+              {
+                "title": "Epistemological Regionalism and the Failure of Mobility",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Ralf St. Clair"
+                ]
+              },
+              {
+                "title": "Peripheral Citizenship: Chinese Immigrants Negotiating Legitimate Ways of Democratic Participation through Quotidian Activisms across Borders",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Ling Lei",
+                  "Shibao Guo"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "CARE-R",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Building Collective Capacity Through Crisis-Informed Financial Literacy: Connecting Research with Practice to Cultivate Communities of Learning and Hope",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": [
+                  "Sandra Roussel"
+                ]
+              },
+              {
+                "title": "EDUCATING FOR THE END IN RURAL NOVA SCOTIA: LEARNING HOW TO DIE IN PLACE AT HOME",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": [
+                  "Emily Mansour-Hemlow"
+                ]
+              },
+              {
+                "title": "Trauma-Informed and Care-Based Pedagogy in Adult Education: Synthesizing Faculty and Learner Perspectives",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": [
+                  "Brianna Strumm",
+                  "Amea Wilbur,",
+                  "Elizabeth Sallos"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "ENV-V",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Pre-service Teachers’ Sustainability Competencies Development through the Social Production of Space: A Qualitative Case Study",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Yijing Lyu"
+                ]
+              },
+              {
+                "title": "Relationships as Resistance: Transformative Adult Learning in the Climate Justice Movement",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Sheena Cameron"
+                ]
+              },
+              {
+                "title": "A Scoping Review of Informal and Nonformal Adult Environmental and Sustainability Education Research: Relevance and Implications for the Research Community",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Lauren Vilen"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "ONLINE-OTHER",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Andragogy in the age of online learning: Rethinking how the technology effects community",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Amanda Benjamin",
+                  "Marshall Gerbrandt",
+                  "Kendra Haines"
+                ]
+              },
+              {
+                "title": "Building Bridges in Synchronous Hybrid Learning Spaces – Cross-sectoral insights into Educators’ Experiences and Negotiation Practices of Ruptures in Adult and Higher Education",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Lisa Breitschwerdt",
+                  "Christina Hümmer",
+                  "Marie Rathmann"
+                ]
+              },
+              {
+                "title": "The Human MOSAIC: Connection and Community as Online Learning Ecosystem Health in Adult Graduate Education",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": []
+              }
+            ]
+          },
+          {
+            "code": "JOURNAL SESSION",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Intro to the journals",
+                "type": "alternative",
+                "typeLabel": "Alternative",
+                "presenters": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "event",
+        "time": "3:30 - 4:00",
+        "startMinutes": 930,
+        "endMinutes": 960,
+        "title": "Break"
+      },
+      {
+        "kind": "sessions",
+        "time": "3:45 - 4:45",
+        "startMinutes": 945,
+        "endMinutes": 1005,
+        "sessions": [
+          {
+            "code": "METH-SJ",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Refusing Silence: Collaborative Autoethnography on Navigating Race, Gender, and Resistance in Higher Education",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Mitsunori Misawa"
+                ]
+              },
+              {
+                "title": "The transformative potential of embodied journaling in critical social justice education",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Stephanie Glick",
+                  "Micah Favel",
+                  "Nina Gaind",
+                  "Arianna Valentino"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "IMM-INTL",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Program Planning in Adult Education for Migrant Integration in Korea: A Diagnostic Inquiry into a Corporate Social Value Initiative",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Romee Lee",
+                  "Sukki Kong"
+                ]
+              },
+              {
+                "title": "Researching nonformal learning places as a possibility for supporting the social participation of Migrants in Germany",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Christiane Hof"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "IND-D",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Decolonization in Adult Education: A Scoping Review Through East Asian and AsianCrit Perspectives",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Hye-Su Kuk",
+                  "Eunbi Sim"
+                ]
+              },
+              {
+                "title": "Teaching Canadian Citizenship on Unceded Land: Educators and the Downloading of Reconciliation",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Lisa Ruth Brunner"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "AS-13",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Critical Discourse: Mapping the Terrain of Modern Adult Education",
+                "type": "alternative",
+                "typeLabel": "Alternative",
+                "presenters": [
+                  "Inna Kerlin"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "AS-14",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Circles of Influence: Practicing Organizational Justice With and For Adult Learners",
+                "type": "alternative",
+                "typeLabel": "Alternative",
+                "presenters": [
+                  "Makena Neal",
+                  "Alicia Jenner",
+                  "Patricia Stewart"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "AS-17",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Embodied Wisdom in Action: Harnessing Living Experience to Guide Service and Learning",
+                "type": "alternative",
+                "typeLabel": "Alternative",
+                "presenters": [
+                  "Elizabeth Bishop"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "AS-19",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Transformational Change: Identity, Self-Image, and Adult Learning in Times of Transition",
+                "type": "alternative",
+                "typeLabel": "Alternative",
+                "presenters": [
+                  "Susan A. McDonald"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "sessionCount": 27
+  },
+  {
+    "title": "May 30",
+    "id": "may-30",
+    "date": "2026-05-30",
+    "blocks": [
+      {
+        "kind": "sessions",
+        "time": "9:00 - 10:30",
+        "startMinutes": 540,
+        "endMinutes": 630,
+        "sessions": [
+          {
+            "code": "S-5",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Beyond Borders: Researching Transnational Mobility and Adult Education",
+                "type": "symposium",
+                "typeLabel": "Symposium",
+                "presenters": [
+                  "Shibao Guo",
+                  "Hongxia Shan, ,",
+                  "Susie Brigham",
+                  "Yan Guo"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "S-8",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Feminist Adult Education Across Contexts: Exploring Theory and Practice in Different Spaces, Places and Communities",
+                "type": "symposium",
+                "typeLabel": "Symposium",
+                "presenters": [
+                  "Emily Dobrich",
+                  "Shauna Butterwick",
+                  "Catherine Etmanski",
+                  "Shirley Walters",
+                  "Robin Sarkar",
+                  "Swati Krishnan",
+                  "Racheal Kalaba",
+                  "Deepti Mahajan"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "AS-3",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "A Decolonial Learning Workshop Using Erasure Poetry",
+                "type": "alternative",
+                "typeLabel": "Alternative",
+                "presenters": [
+                  "Gitanjaly Chhabra",
+                  "Kay Hare"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "S-3",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Adult Education in Health Contexts: Relational Learning, Hidden Labour, and Boundary-Crossing Work",
+                "type": "symposium",
+                "typeLabel": "Symposium",
+                "presenters": [
+                  "Jonathan Easey",
+                  "Jude Walker",
+                  "Carrie Krekoski",
+                  "Penny Hatzimanolakis"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "sessions",
+        "time": "11 - 12pm",
+        "startMinutes": 660,
+        "endMinutes": 720,
+        "sessions": [
+          {
+            "code": "SML",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "From Fandom to Civic Agency: Social Movement Learning among K-pop Fandom at South Korea’s ‘Light Revolution’",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Kwankyeung Kwak",
+                  "Joon Heo"
+                ]
+              },
+              {
+                "title": "Social Change Creativity as a Useful Complement to Social Movement Learning",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Catherine Etmanski",
+                  "Amy Zidulka"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "WOMEN",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "“Where Hope Blooms: Appreciative Inquiry Approach Case Study into Educational Practices of Feminist Organizations”; Roundtable Discussion about Feminist Pedagogies in Practice and Feminist Approaches to Inclusive Workplaces.",
+                "type": "roundtable",
+                "typeLabel": "Roundtable",
+                "presenters": [
+                  "Joanna Stewart"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "POLICY",
+            "room": "TBA",
+            "items": [
+              {
+                "title": "Pan-Canadian Adult Education Policy Development? Lessons from a European Union Case Study",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Robert McGray",
+                  "Marie Ritche"
+                ]
+              },
+              {
+                "title": "Philosophies, Policies, and Practices: Navigating Lifelong Learning Systems in the U.S. and Europe",
+                "type": "paper",
+                "typeLabel": "Paper",
+                "presenters": [
+                  "Christy Rhodes",
+                  "Judith Alamprese"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "sessionCount": 7
+  }
+];
+    const buttons = document.querySelectorAll('[data-density-button]');
+    const dayLinks = document.querySelectorAll('.day-nav a');
+    const mobileDateSelect = document.getElementById('mobile-date');
+    const mobileTimeSelect = document.getElementById('mobile-time');
+    const storedDensity = localStorage.getItem('programDensity') || 'full';
+
+    function setDensity(density) {
+      document.body.dataset.density = density;
+      localStorage.setItem('programDensity', density);
+      buttons.forEach((button) => {
+        button.setAttribute('aria-pressed', String(button.dataset.densityButton === density));
+      });
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => setDensity(button.dataset.densityButton));
+    });
+    setDensity(storedDensity);
+
+    function setCurrentDay(dayId) {
+      dayLinks.forEach((link) => {
+        const isCurrent = link.getAttribute('href') === '#' + dayId;
+        if (isCurrent) {
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+      if (mobileDateSelect) {
+        mobileDateSelect.value = dayId;
+      }
+    }
+
+    function blockAnchor(day, index) {
+      return day.id + '-block-' + index;
+    }
+
+    function populateMobileTimes(dayId) {
+      if (!mobileTimeSelect) {
+        return;
+      }
+      const day = scheduleData.find((candidate) => candidate.id === dayId) || scheduleData[0];
+      mobileTimeSelect.innerHTML = '';
+      day.blocks.forEach((block, index) => {
+        const option = document.createElement('option');
+        option.value = blockAnchor(day, index);
+        option.textContent = block.time;
+        mobileTimeSelect.appendChild(option);
+      });
+    }
+
+    function jumpToId(id) {
+      const target = document.getElementById(id);
+      if (target) {
+        target.scrollIntoView({ block: 'start' });
+      }
+    }
+
+    function firstBlockIdForDay(dayId) {
+      const day = scheduleData.find((candidate) => candidate.id === dayId);
+      return day && day.blocks.length ? blockAnchor(day, 0) : dayId;
+    }
+
+    function dateKey(date) {
+      return (
+        date.getFullYear() +
+        '-' +
+        String(date.getMonth() + 1).padStart(2, '0') +
+        '-' +
+        String(date.getDate()).padStart(2, '0')
+      );
+    }
+
+    function findCurrentScheduleTargetId(now) {
+      const today = dateKey(now);
+      const day = scheduleData.find((candidate) => candidate.date === today);
+      if (!day) {
+        return null;
+      }
+      const minutes = now.getHours() * 60 + now.getMinutes();
+      for (let index = 0; index < day.blocks.length; index += 1) {
+        const block = day.blocks[index];
+        if (
+          typeof block.startMinutes === 'number' &&
+          typeof block.endMinutes === 'number' &&
+          block.startMinutes <= minutes &&
+          minutes <= block.endMinutes
+        ) {
+          return blockAnchor(day, index);
+        }
+      }
+      return null;
+    }
+
+    function syncNavigationToTarget(targetId) {
+      for (const day of scheduleData) {
+        for (let index = 0; index < day.blocks.length; index += 1) {
+          const blockId = blockAnchor(day, index);
+          if (blockId === targetId) {
+            setCurrentDay(day.id);
+            populateMobileTimes(day.id);
+            if (mobileTimeSelect) {
+              mobileTimeSelect.value = blockId;
+            }
+            return;
+          }
+        }
+      }
+    }
+
+    const startupTargetId = findCurrentScheduleTargetId(new Date());
+
+    dayLinks.forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        const dayId = link.getAttribute('href').slice(1);
+        setCurrentDay(dayId);
+        populateMobileTimes(dayId);
+        jumpToId(dayId);
+        history.pushState(null, document.title, '#' + dayId);
+      });
+    });
+
+    if (mobileDateSelect && mobileTimeSelect && scheduleData.length) {
+      populateMobileTimes(scheduleData[0].id);
+      mobileDateSelect.addEventListener('change', () => {
+        setCurrentDay(mobileDateSelect.value);
+        populateMobileTimes(mobileDateSelect.value);
+        const firstBlockId = firstBlockIdForDay(mobileDateSelect.value);
+        mobileTimeSelect.value = firstBlockId;
+        jumpToId(mobileDateSelect.value);
+      });
+      mobileTimeSelect.addEventListener('change', () => jumpToId(mobileTimeSelect.value));
+    }
+
+    const mobileMedia = window.matchMedia('(max-width: 720px)');
+    let scrollSyncFrame = null;
+
+    function syncMobileJumpbar() {
+      if (!mobileDateSelect || !mobileTimeSelect || !mobileMedia.matches) {
+        return;
+      }
+      const days = Array.from(document.querySelectorAll('.day'));
+      const targetLine = 96;
+      let currentDay = days[0];
+      for (const day of days) {
+        if (day.getBoundingClientRect().top <= targetLine) {
+          currentDay = day;
+        } else {
+          break;
+        }
+      }
+      if (!currentDay) {
+        return;
+      }
+      const blocks = Array.from(currentDay.querySelectorAll('.time-block'));
+      let current = blocks[0];
+      for (const block of blocks) {
+        if (block.getBoundingClientRect().top <= targetLine) {
+          current = block;
+        } else {
+          break;
+        }
+      }
+      if (mobileDateSelect.value !== currentDay.id) {
+        setCurrentDay(currentDay.id);
+        populateMobileTimes(currentDay.id);
+      }
+      if (current && mobileTimeSelect.value !== current.id) {
+        mobileTimeSelect.value = current.id;
+      }
+    }
+
+    function requestMobileJumpbarSync() {
+      if (scrollSyncFrame !== null) {
+        return;
+      }
+      scrollSyncFrame = requestAnimationFrame(() => {
+        scrollSyncFrame = null;
+        syncMobileJumpbar();
+      });
+    }
+
+    window.addEventListener('scroll', requestMobileJumpbarSync, { passive: true });
+    window.addEventListener('resize', requestMobileJumpbarSync);
+    window.addEventListener('load', requestMobileJumpbarSync);
+
+    function applyStartupPosition() {
+      if (window.location.hash) {
+        return;
+      }
+      if (startupTargetId) {
+        jumpToId(startupTargetId);
+        syncNavigationToTarget(startupTargetId);
+      } else {
+        window.scrollTo(0, 0);
+      }
+    }
+
+    function keepStartupPosition() {
+      applyStartupPosition();
+      requestAnimationFrame(applyStartupPosition);
+      setTimeout(applyStartupPosition, 0);
+      setTimeout(applyStartupPosition, 75);
+      setTimeout(applyStartupPosition, 250);
+    }
+
+    applyStartupPosition();
+    window.addEventListener('DOMContentLoaded', keepStartupPosition);
+    window.addEventListener('load', keepStartupPosition);
+    window.addEventListener('pageshow', keepStartupPosition);
+    if (!window.location.hash) {
+      let resetAttempts = 0;
+      const resetTimer = window.setInterval(() => {
+        applyStartupPosition();
+        resetAttempts += 1;
+        if (resetAttempts >= 20) {
+          window.clearInterval(resetTimer);
+        }
+      }, 100);
+    }
+  </script>
+</body>
+</html>
