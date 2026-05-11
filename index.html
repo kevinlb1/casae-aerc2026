@@ -242,6 +242,7 @@ h2 {
   color: var(--muted);
   font-size: 0.78rem;
   font-weight: 850;
+  text-transform: uppercase;
 }
 
 .presentation-list {
@@ -366,6 +367,7 @@ body[data-density="compact"] .time-block > time {
 body[data-density="compact"] .session-grid {
   display: grid;
   grid-template-columns: repeat(var(--session-count), minmax(0, 1fr));
+  align-items: stretch;
   width: 100%;
   gap: 6px;
   min-width: 0;
@@ -381,6 +383,7 @@ body[data-density="compact"] .session-grid::-webkit-scrollbar {
 body[data-density="compact"] .session-card {
   min-width: 0;
   box-shadow: none;
+  align-self: stretch;
 }
 
 body[data-density="compact"] .session-meta {
@@ -404,6 +407,9 @@ body[data-density="compact"] .session-meta span:first-child {
   color: var(--ink);
   font-size: 0.76rem;
   font-weight: 850;
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
 }
 
 body[data-density="compact"] .session-meta span:last-child {
